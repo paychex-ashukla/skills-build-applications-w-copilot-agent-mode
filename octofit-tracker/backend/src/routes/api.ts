@@ -1,15 +1,12 @@
 import { Router } from 'express';
+import { getApiBaseUrl } from '../config/api';
 
 const router = Router();
-const codespaceName = process.env.CODESPACE_NAME;
-const baseUrl = codespaceName
-  ? `https://${codespaceName}-8000.app.github.dev`
-  : 'http://localhost:8000';
 
 router.get('/', (_request, response) => {
   response.json({
     service: 'octofit-api',
-    baseUrl,
+    baseUrl: getApiBaseUrl(),
     resources: ['users', 'teams', 'activities', 'leaderboard', 'workouts'],
   });
 });
